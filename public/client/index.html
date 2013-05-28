@@ -75,7 +75,7 @@ $.post('http://localhost:8080/exists',{deviceID:deviceID},function(data){
 	else{
 		console.log('device exists, checking authorization')
 		//set intervals here so we don't poll too soon
-		//mainClient.checkAuthorization();
+		mainClient.checkAuthorization();
 	}
 })
 	
@@ -99,7 +99,7 @@ mainClient.checkAuthorization=function(deviceID,callback){
 	console.log('checking authorization')
 	//send the device id to the server and check server side for its authorization
 	var deviceID= deviceID;
-	$.get('http://localhost:8080/checkAuthorization'+deviceID,function(data){
+	$.post('http://localhost:8080/checkAuthorization',{deviceID:deviceID},function(data){
 		var authorization = data.authorization;
 		if (data.authorization=="authorized"){
 			mainClient.trigger('authorized')

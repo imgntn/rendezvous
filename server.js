@@ -67,7 +67,7 @@ var Record = mongoose.model('record', RecordSchema);
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 	device = req.params.deviceID;
-		Record.findOne({deviceID:device},function(err,data) {
+		Record.findOne({deviceID:device},'uuid',function(err,data) {
 		
 		if (err) {return handleError(err)}
 
@@ -86,12 +86,37 @@ var Record = mongoose.model('record', RecordSchema);
 
 	}
 
+		function checkAuthorization(req,res,next){
+
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+	device = req.params.deviceID;
+		Record.findOne({deviceID:device},'authorized',function(err,data) {
+		
+		if (err) {return handleError(err)}
+
+			else{
+				if(data!==null && typeof data!=='undefined'){
+						res.send(data);
+				}
+				else{
+					res.send({authorized:false})
+				}
+			
+
+			}
+		})
+
+
+	}
+
 function postRecord(req, res, next) {
 
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 
 	var record = new Record();
+	record.authorized="unauthorized";
 	var saveRecord = function() {
 		record.save(function() {
 
@@ -153,6 +178,7 @@ server.get('/records', getRecords);
 server.post('/records/:deviceID',postRecord);
 server.post('/records', postRecord);
 server.post('/exists', recordExists);
+server.post('/checkAuthorization', checkAuthorization);
 
 
 

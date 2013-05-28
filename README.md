@@ -44,10 +44,10 @@ passport-local-mongoose<br>
 2. extract the contents to /usr/local/mongodb
 3. cd /usr/local/mongodb and run the following commands 
 
-$ sudo mkdir -p /data/db
-$ whoami
-jpollack
-$ sudo chown jpollack /data/db
+$ sudo mkdir -p /data/db<br>
+$ whoami<br>
+jpollack<br>
+$ sudo chown jpollack /data/db<br>
 
 
 4. run the following commands to add mongo to your path

@@ -2,7 +2,13 @@
 by James B. Pollack<br>
 A Different Engine<br>
 
-This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.<br>
+This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.  It minimizes user input on the device itself due to limited input modalities. <br>
+
+<b>Table of Contents</b></br>
+Pattern<br>
+Prerequisites<br>
+Setup (1,2,3)<br>
+Using (1,2,3,4)<br> 
 
 <b>The pattern:<br>
 
@@ -34,13 +40,12 @@ passport<br>
 passport-local<br>
 passport-local-mongoose<br><br>
 
-<b>How to install node packages:</b><br>
-npm install restify connect mongoose node-uuid<br>
 
-<b>Installing node.js</b><br>
+
+<b>Setup #1 -- Installing node.js</b><br>
 Use package installer at http://nodejs.org/
 
-<b>Installing mongoDB (OS X)
+<b>Setup #2 -- Installing mongoDB (OS X)
 
 -1. download from http://www.mongodb.org/dr/fastdl.mongodb.org/osx/mongodb-osx-x86_64-2.4.3.tgz/download<br>
 -2. extract the contents to /usr/local/mongodb<br>
@@ -67,16 +72,20 @@ export PATH=$PATH:$MONGO_PATH/bin
 
 -7. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
 
-<b>To start the server:</b><br>
+<b>Setup # 3 --  Installing node.jspackages:</b><br>
+npm install restify connect mongoose node-uuid<br>
+
+
+<b>Using # 1 --To start the server:</b><br>
 node server.js
 
-<b>To use the client:</b><br>
-from http://localhost:3000, run mainClient.init('your_deviceID') in your Javascript console (or programatically)<br>
+<b>Using # 2 -- To register a device from the client:</b><br>
+visit http://localhost:3000 and run mainClient.init('your_deviceID') in your Javascript console (or programatically)<br>
 *where your_deviceID is the unique identifier of the device<br>
 
-<b>To send an authorization for a device to the server after provider authorization of the user account</b><br>
+<b>Using # 3 -- To send an authorization for a device to the server after provider authorization of the user account</b><br>
 $.post('http://localhost:8081/authenticateDevice',{regCode:'Your_regCode'})<br>
 *where your_regCode is the regCode provided to the user<br>
 
-<b> Client-side Authorization State Change</b><br>
+<b>Using # 4 -- Client-side Authorization State Change</b><br>
 You'll see that mainClient.authorized is false when the client is not authorized, but changes to true when the polling returns an authorized parameter.  Use this flag to drive behavior on the client.

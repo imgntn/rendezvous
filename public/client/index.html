@@ -92,6 +92,8 @@ mainClient.registerDevice = function(deviceID,callback){
 console.log('Registering this device with the database...');
 var deviceID=deviceID
 if(typeof deviceID!=="undefined"){
+
+	//have to send a message with, to prevent random records from being created (..?)
 	$.post('http://localhost:8080/records',{message:'testProviderID',deviceID:deviceID})
 		//set intervals here so we don't poll too soon
 	mainClient.setIntervals(deviceID);

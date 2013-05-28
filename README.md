@@ -73,11 +73,12 @@ export PATH=$PATH:$MONGO_PATH/bin
 
 -7. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
 
-<b>Setup # 3 --  Installing node.jspackages:</b><br>
+<b>Setup # 3 --  Installing node.js packages</b> (inside rendezvous folder)<br>
+
 npm install restify connect mongoose node-uuid<br>
 
 
-<b>Using # 1 --To start the server:</b><br>
+<b>Using # 1 --To start the server (inside rendezvous folder):</b> (inside rendezvous folder)<br>
 copy sampleconfig.js to config.js and set it up so it points to mongodb://localhost:/yourDatabaseName i.e. mongodb://localhost:/rdzv<br>
 node server.js
 This will run servers on two ports right now, 8081 (the server) and 3001 (the client)

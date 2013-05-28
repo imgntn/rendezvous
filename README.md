@@ -23,18 +23,18 @@ This pattern is used to link a device, such as a Smart TV or Roku, with a partic
 server: node.js -- see below for installation notes<br>
 database: mongodb -- see below for installation notes<br>
 node modules: <br>
-//REST API, middleware, database interface, uuid generator<br><br>
+//REST API, middleware, database interface, uuid generator<br>
 restify<br>
 connect<br>
 mongoose<br>
-node-uuid<br>
-//user auth stuff, not needed yet<br><br>
+node-uuid<br><br>
+//user auth stuff, not needed yet<br>
 bcrypt<br>
 passport<br>
 passport-local<br>
 passport-local-mongoose<br><br>
 
-How to install node packages:<br>
+<b>How to install node packages:<br>
 npm install restify connect mongoose node-uuid<br>
 
 

@@ -39,6 +39,7 @@ passport-local<br>
 passport-local-mongoose<br>
 
 //installing mongodb
+
 1. download from http://www.mongodb.org/dr/fastdl.mongodb.org/osx/mongodb-osx-x86_64-2.4.3.tgz/download
 2. extract the contents to /usr/local/mongodb
 3. cd /usr/local/mongodb and run the following commands 

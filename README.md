@@ -74,7 +74,7 @@ mainClient.init('your_deviceID')<br>
 *where your_deviceID is the unique identifier of the device<br>
 
 <b>To send an authorization for a device to the server after provider authorization</b><br>
-$.post ('http://localhost:8081/authenticateDevice',{regCode:'Your_regCode'}<br>
+$.post('http://localhost:8081/authenticateDevice',{regCode:'Your_regCode'})<br>
 *where your_regCode is the regCode provided to the user<br>
 
 <b> Client-side Authorization State Change</b><br>

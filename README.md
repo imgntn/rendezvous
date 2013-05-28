@@ -37,8 +37,6 @@ passport-local-mongoose<br><br>
 <b>How to install node packages:</b><br>
 npm install restify connect mongoose node-uuid<br>
 
-
-
 <b>Installing node.js</b><br>
 Use package installer at http://nodejs.org/
 
@@ -69,11 +67,14 @@ export PATH=$PATH:$MONGO_PATH/bin
 
 -7. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
 
+<b>To start the server:</b><br>
+node server.js
+
 <b>To use the client:</b><br>
-mainClient.init('your_deviceID')<br>
+from http://localhost:3000, run mainClient.init('your_deviceID') in your Javascript console (or programatically)<br>
 *where your_deviceID is the unique identifier of the device<br>
 
-<b>To send an authorization for a device to the server after provider authorization</b><br>
+<b>To send an authorization for a device to the server after provider authorization of the user account</b><br>
 $.post('http://localhost:8081/authenticateDevice',{regCode:'Your_regCode'})<br>
 *where your_regCode is the regCode provided to the user<br>
 

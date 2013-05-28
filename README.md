@@ -34,7 +34,7 @@ passport<br>
 passport-local<br>
 passport-local-mongoose<br><br>
 
-<b>How to install node packages:<br>
+<b>How to install node packages:</b><br>
 npm install restify connect mongoose node-uuid<br>
 
 

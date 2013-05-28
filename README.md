@@ -8,7 +8,8 @@ This pattern is used to link a device, such as a Smart TV or Roku, with a partic
 Pattern<br>
 Prerequisites<br>
 Setup (1,2,3)<br>
-Using (1,2,3,4)<br> 
+Using (1,2,3,4)<br>
+Screenshots<br>
 
 <b>The pattern:<br>
 

@@ -2,6 +2,7 @@
 
 // expire regCodes after 1 hr, add 'no regcode' case to data that authenticateDevice returns to provider
 // set mongodb subscriptionExpiration time based on post to authenticateDevice
+// create new docs for these and use internal mongodb expiry?
 
 //NICE TO HAVE
 // user account auth layer

@@ -48,6 +48,7 @@ var RecordSchema = new Schema({
 	regCodeExpiration: Date,
 	authorized:String,
 	message:String,
+	subscriptionExpiration:Date,
 });
 
 
@@ -218,7 +219,7 @@ record.regCodeExpiration = expiration;
 	}
 
 //routes
-server.listen(8080, function() {
+server.listen(8081, function() {
 	console.log('%s listening at %s', server.name, server.url);
 });
 server.get('/records', getRecords);
@@ -248,5 +249,5 @@ var app = connect()
     res.end('Hello from Connect!\n');
   });
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(3001);
 

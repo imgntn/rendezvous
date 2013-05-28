@@ -7,6 +7,7 @@ This pattern is used to link a device, such as a Smart TV or Roku, with a partic
 The pattern:
 
 The client requests a registration code from the server by sending it a device ID.
+<br>
 The server generates a registration code and returns it to the client.
 The client displays the code to the user.
 The user enters their account information, along with the registration code, on the provider website.

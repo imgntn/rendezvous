@@ -23,25 +23,24 @@ This pattern is used to link a device, such as a Smart TV or Roku, with a partic
 server: node.js -- see below for installation notes<br>
 database: mongodb -- see below for installation notes<br>
 node modules: <br>
-//REST API, middleware, database interface, uuid generator<br>
+//REST API, middleware, database interface, uuid generator<br><br>
 restify<br>
 connect<br>
 mongoose<br>
-mongoose-schema-extend<br>
 node-uuid<br>
+//user auth stuff, not needed yet<br><br>
+bcrypt<br>
+passport<br>
+passport-local<br>
+passport-local-mongoose<br><br>
 
 How to install node packages:<br>
 npm install restify connect mongoose node-uuid<br>
 
-//user auth stuff, not needed yet<br>
-bcrypt<br>
-passport<br>
-passport-local<br>
-passport-local-mongoose<br>
 
-<b>Installing node.js
-Use package installer at
-http://nodejs.org/
+
+<b>Installing node.js</b><br>
+Use package installer at http://nodejs.org/
 
 <b>Installing mongoDB (OS X)
 
@@ -70,12 +69,13 @@ export PATH=$PATH:$MONGO_PATH/bin
 
 -7. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
 
-<b>To use the client:<br>
+<b>To use the client:</b><br>
 mainClient.init('your_deviceID')<br>
 *where your_deviceID is the unique identifier of the device<br>
 
-<b>To send an authorization for a device to the server after provider authorization<br>
+<b>To send an authorization for a device to the server after provider authorization</b><br>
 $.post ('http://localhost:8081/authenticateDevice',{regCode:'Your_regCode'}<br>
 *where your_regCode is the regCode provided to the user<br>
 
+<b> Client-side Authorization State Change</b><br>
 You'll see that mainClient.authorized is false when the client is not authorized, but changes to true when the polling returns an authorized parameter.  Use this flag to drive behavior on the client.

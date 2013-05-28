@@ -64,5 +64,3 @@ export PATH=$PATH:$MONGO_PATH/bin
 9.3 type show dbs -> should now show rdvz
 
 10. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
-
-

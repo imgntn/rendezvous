@@ -59,13 +59,15 @@ var RecordSchema = new Schema({
 	dateCreated: Date,
 	uuid: String,
 	regCode: String,
-	regCodeExpiration: {
-		type:Date,
-		expires:'1h'
-	},
+	regCodeExpiration:Date,
 	authorized: String,
 	message: String,
 	subscriptionExpiration: Date,
+	//to autoExpire a document
+	// createdAt: {
+	// 	type:Date,
+	// 	expires:'1m'
+	// },
 });
 
 
@@ -206,19 +208,20 @@ function postRecord(req, res, next) {
 
 		//set an expiration for the regcode
 
-		// function setExpiration(days) {
-		// 	if (days) {
-		// 		var date = new Date();
-		// 		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-		// 		var expires = date.toGMTString();
-		// 	}
-		// 	return expires
-		// }
+		function setExpiration(days) {
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+				var expires = date.toGMTString();
+			}
+			return expires
+		}
 
-		// var expiration = setExpiration(1)
-		//record.regCodeExpiration = expiration;
+		var expiration = setExpiration(1)
+		record.regCodeExpiration = expiration;
 
-		record.regCodeExpiration= new Date();
+		//could create a new doc with the regcode and delete it automatically after a set time, based on the schema above
+		//record.createdAt= new Date();
 
 		saveRecord()
 	}

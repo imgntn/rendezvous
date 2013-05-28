@@ -124,7 +124,7 @@ return
 mainClient.unLinkDevice = function(deviceID,callback){
 console.log('unlinking this device')
 var deviceID = deviceID;
-$.post('http://localhost/deleteDevice',{deviceID:deviceID})
+$.post('http://localhost:8081/deleteDevice',{deviceID:deviceID})
 return
 };
 

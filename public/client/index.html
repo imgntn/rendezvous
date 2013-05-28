@@ -41,14 +41,17 @@ mainClient.init = function(deviceID){
 return
 }
 
-mainClient.setIntervals=function(){
+mainClient.setIntervals=function(deviceID){
 	console.log('setting authinterval')
-
-			var someFunction=function(){
-					console.log(Date.now())
-				}
-	//authInterval = setInterval(mainClient.checkAuthorization(deviceID),1000);
-	authInterval = setInterval(someFunction,authIntervalLength);
+var deviceID = deviceID;
+			// var someFunction=function(){
+			// 		console.log(Date.now())
+			// 	}
+			var authCheck = function(){
+				mainClient.checkAuthorization(deviceID)
+			}
+	authInterval = setInterval(authCheck,1000)
+	//authInterval = setInterval(someFunction,authIntervalLength);
 return
 }
 
@@ -61,7 +64,7 @@ mainClient.clearIntervals = function(interval){
 mainClient.doesDeviceExist=function(deviceID,callback){
 	console.log('checking to see if the device exists')
 
-	deviceID=deviceID;
+	var deviceID=deviceID;
 //send device id to server and see if deviceID already exists to avoid polling 
 $.post('http://localhost:8080/exists',{deviceID:deviceID},function(data){
 
@@ -75,7 +78,8 @@ $.post('http://localhost:8080/exists',{deviceID:deviceID},function(data){
 	else{
 		console.log('device exists, checking authorization')
 		//set intervals here so we don't poll too soon
-		mainClient.checkAuthorization();
+		 mainClient.setIntervals(deviceID);
+		 mainClient.checkAuthorization(deviceID);
 	}
 })
 	
@@ -90,7 +94,7 @@ var deviceID=deviceID
 if(typeof deviceID!=="undefined"){
 	$.post('http://localhost:8080/records',{message:'testProviderID',deviceID:deviceID})
 		//set intervals here so we don't poll too soon
-	mainClient.setIntervals();
+	mainClient.setIntervals(deviceID);
 }
 return
 }
@@ -100,12 +104,13 @@ mainClient.checkAuthorization=function(deviceID,callback){
 	//send the device id to the server and check server side for its authorization
 	var deviceID= deviceID;
 	$.post('http://localhost:8080/checkAuthorization',{deviceID:deviceID},function(data){
-		var authorization = data.authorization;
-		if (data.authorization=="authorized"){
+		var authorized = data.authorized;
+		if (data.authorized=="authorized"){
 			mainClient.trigger('authorized')
 		}
 		else {
 			mainClient.trigger('unauthorized')
+
 		}
 
 	})

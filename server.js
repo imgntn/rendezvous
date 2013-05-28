@@ -191,17 +191,28 @@ record.regCodeExpiration = expiration;
 
 };
 
+//authenticates the device using a regcode to change its auth status in the database
+//$.post('http://localhost:8080/authenticateDevice',{regCode:"439cfb1"})
 
 
-
-
-// //delete by feature match -- 
+// // //delete by feature match -- 
 // Record.remove({ __v: 0 }, function (err) {
 //   if (err) return handleError(err);
 //   // removed!
 // });
 
+	function deleteDevice(req,res,next){
 
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+	var deviceID = req.params.deviceID;
+	Record.remove({ deviceID: deviceID }, function (err) {
+  if (err) return handleError(err);
+  // removed!
+});
+	console.log('DELETED DEVICE: ', deviceID)
+
+	}
 
 //routes
 server.listen(8080, function() {
@@ -213,6 +224,7 @@ server.post('/records', postRecord);
 server.post('/exists', recordExists);
 server.post('/checkAuthorization', checkAuthorization);
 server.post('/authenticateDevice', authenticateDevice);
+server.post('/deleteDevice', deleteDevice);
 
 
 

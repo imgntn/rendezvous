@@ -4,7 +4,7 @@ A Different Engine<br>
 
 This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.<br>
 
-The pattern:<br>
+<b>The pattern:<br>
 
 --The client requests a registration code from the server by sending it a device ID.<br>
 --The server generates a registration code and returns it to the client.<br>

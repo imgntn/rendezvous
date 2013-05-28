@@ -1,4 +1,7 @@
-
+//TODO
+// user account auth layer
+//verify regcode expiry
+//clientside tokenExpiry
 
 	//quick last method for arrays
 	Array.prototype.last = Array.prototype.last || function() {

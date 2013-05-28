@@ -31,6 +31,7 @@ mongoose<br>
 mongoose-schema-extend<br>
 node-uuid<br>
 
+ie. npm install restify connect mongoose mongoose-schema-extend node-uuid<br>
 
 //user auth stuff, not needed yet<br>
 bcrypt<br>

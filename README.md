@@ -50,10 +50,10 @@ jpollack<br>
 $ sudo chown jpollack /data/db<br>
 
 
-4. run the following commands to add mongo to your path
-vi ~/.profile (or ~/.bash_profile) and add the following
-export MONGO_PATH=/usr/local/mongodb
-export PATH=$PATH:$MONGO_PATH/bin
+4. run the following commands to add mongo to your path<br>
+vi ~/.profile (or ~/.bash_profile) and add the following<br>
+export MONGO_PATH=/usr/local/mongodb<br>
+export PATH=$PATH:$MONGO_PATH/bin<br>
 
 5. open a new tab and type in mongo -version 
 5.1 mongod (starts server)

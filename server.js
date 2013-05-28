@@ -232,6 +232,41 @@ function postRecord(req, res, next) {
 
 
 
+function deAuthenticateDevice(req, res, next) {
+	//authenticates the device using a regcode to change its auth status in the database
+	//$.post('http://localhost:8080/authenticateDevice',{regCode:"439cfb1"})
+
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+	var deviceID = req.params.deviceID;
+	Record.findOne({
+		deviceID: deviceID
+	}, 'authorized', function(err, data) {
+
+		if (err) {
+			return handleError(err)
+		} else {
+			if (data !== null && typeof data !== 'undefined') {
+				//success case
+				console.log(data);
+				console.log('auth:', data.authorized);
+				data.authorized = "unauthorized";
+				console.log('auth:', data.authorized);
+				data.save();
+				res.send(data);
+
+			} else {
+				//no data case
+				res.send({authorized:'No such regCode'})
+			}
+
+
+		}
+	})
+
+
+}
+
 function deleteDevice(req, res, next) {
 	//deletes a device from the database.  the whole device record.  so use sparingly!  a.k.a. "unlink"
 
@@ -258,6 +293,7 @@ server.post('/records', postRecord);
 server.post('/exists', recordExists);
 server.post('/checkAuthorization', checkAuthorization);
 server.post('/authenticateDevice', authenticateDevice);
+server.post('/deAuthenticateDevice', deAuthenticateDevice);
 server.post('/deleteDevice', deleteDevice);
 
 

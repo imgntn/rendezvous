@@ -1,3 +1,13 @@
+
+
+	//quick last method for arrays
+	Array.prototype.last = Array.prototype.last || function() {
+    var l = this.length;
+    return this[l-1];
+}
+
+//requires
+
 var uuid = require('node-uuid');
 
 var restify = require('restify');
@@ -11,58 +21,99 @@ db = mongoose.connect(config.creds.mongoose_auth_local);
 
 extend = require('mongoose-schema-extend');
 
+var User = require('./schema/User');
+
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+// // CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
+
+
 Schema = mongoose.Schema;
 
-var MessageSchema = new Schema({
 
-	message: String,
+var RecordSchema = new Schema({
+	deviceID:{type:String,unique:true},
 	dateCreated: Date,
-	expirationDate: Date,
 	uuid: String,
-	user: String
+	regCode:String,
+	regCodeExpiration: Date,
+	authorized:String,
+	message:String,
 });
 
 
 
-var Message = mongoose.model('message', MessageSchema);
+var Record = mongoose.model('record', RecordSchema);
 
-//an extension 
-var longMessageSchema = MessageSchema.extend({
-	regCode: String
-});
 
-var longMessage = mongoose.model('longmessage', longMessageSchema)
-
-	function getMessages(req, res, next) {
+	function getRecords(req, res, next) {
 
 		res.header('Access-Control-Allow-Origin', '*');
 		res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 
-		Message.find().sort('Date').execFind(function(arr, data) {
+		Record.find().sort('dateCreated').execFind(function(arr, data) {
 			res.send(data);
 		})
 	};
 
-function postMessage(req, res, next) {
+	function recordExists(req,res,next){
+
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+	device = req.params.deviceID;
+		Record.findOne({deviceID:device},function(err,data) {
+		
+		if (err) {return handleError(err)}
+
+			else{
+				if(data!==null && typeof data!=='undefined'){
+						res.send(data);
+				}
+				else{
+					res.send({exists:false})
+				}
+			
+
+			}
+		})
+
+
+	}
+
+function postRecord(req, res, next) {
 
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 
-	var message = new Message();
-	var saveMsg = function() {
-		message.save(function() {
+	var record = new Record();
+	var saveRecord = function() {
+		record.save(function() {
 
 			res.send(req.body);
 		});
 	}
-	if (typeof req.params.user !== 'undefined'){
-console.log(req.params.user);
+	if (typeof req.params.deviceID !== 'undefined'){
+console.log(req.params.deviceID);
 	};
 	if (typeof req.params.message !== 'undefined') {
-		message.message = req.params.message;
-		message.dateCreated = new Date();
+		record.message = req.params.message;
+		record.dateCreated = new Date();
 		
+		record.uuid = uuid.v4();
 
+///generate a regcode
+var regCode = record.uuid.split('-')[0].substring(0,3)+record.uuid.split('-').last().substring(0,4)
+record.regCode = regCode;
+
+record.deviceID = req.params.deviceID;
+
+//set an expiration for the regcode
 	function setExpiration(days) {
     if (days) {
         var date = new Date();
@@ -71,25 +122,38 @@ console.log(req.params.user);
     }
     return expires
 }
-var expiration = setExpiration(30)
-message.expirationDate = expiration;
+
+var expiration = setExpiration(1)
+record.regCodeExpiration = expiration;
 
 
-		message.uuid = uuid.v4();
-		message.user = req.params.user;
-
-		saveMsg()
+		saveRecord()
 	}
 
 
 };
 
+
+
+
+
+// //delete by feature match -- 
+// Record.remove({ __v: 0 }, function (err) {
+//   if (err) return handleError(err);
+//   // removed!
+// });
+
+
+
+//routes
 server.listen(8080, function() {
 	console.log('%s listening at %s', server.name, server.url);
 });
-server.get('/messages', getMessages);
-server.post('/messages/:user',postMessage);
-server.post('/messages', postMessage);
+server.get('/records', getRecords);
+server.post('/records/:deviceID',postRecord);
+server.post('/records', postRecord);
+server.post('/exists', recordExists);
+
 
 
 
@@ -111,10 +175,3 @@ var app = connect()
 
 http.createServer(app).listen(3000);
 
-/*
-//delete by feature match -- 
-Message.remove({ __v: 0 }, function (err) {
-  if (err) return handleError(err);
-  // removed!
-});
-*/

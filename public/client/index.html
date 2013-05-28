@@ -7,24 +7,132 @@
 <body>
 	<div id="main"></div>
 	<script>
-	mainClient = $('#main');
+
+	mainClient = {};
 	_.extend(mainClient,Backbone.Events)
-	mainClient.on('attemptToVerifyLink',function(){
-		console.log('verifylink')
-	},this);
+	
+	mainClient.authorized=false;
 
-	mainClient.getMessages=function(){
+var authInterval;
+var authIntervalLength=1000;
 
-		$.get('http://localhost:8080/messages',function(data){
+
+mainClient.on('unauthorized',function(){
+	console.log('this client is not authorized')
+	mainClient.authorized=false;
+	return
+},this)
+
+	mainClient.on('authorized',function(){
+		console.log('this client is authorized');
+		mainClient.clearIntervals();
+		mainClient.authorized=true;
+		return
+	},this)
+
+
+
+mainClient.init = function(deviceID){
+	console.log('Initializing Client');
+	var deviceID= deviceID;
+	//check if device exists so we don't generate unnecessary regcodes
+	mainClient.doesDeviceExist(deviceID);
+	
+return
+}
+
+mainClient.setIntervals=function(){
+	console.log('setting authinterval')
+
+			var someFunction=function(){
+					console.log(Date.now())
+				}
+	//authInterval = setInterval(mainClient.checkAuthorization(deviceID),1000);
+	authInterval = setInterval(someFunction,authIntervalLength);
+return
+}
+
+mainClient.clearIntervals = function(interval){
+	console.log('clearing authinterval')
+	clearInterval(authInterval)
+	return
+}
+
+mainClient.doesDeviceExist=function(deviceID,callback){
+	console.log('checking to see if the device exists')
+
+	deviceID=deviceID;
+//send device id to server and see if deviceID already exists to avoid polling 
+$.post('http://localhost:8080/exists',{deviceID:deviceID},function(data){
+
+	if(data.exists==false){
+		console.log('new device, registering it')
+		mainClient.registerDevice(deviceID)
+
+
+	}
+
+	else{
+		console.log('device exists, checking authorization')
+		//set intervals here so we don't poll too soon
+		//mainClient.checkAuthorization();
+	}
+})
+	
+
+return
+};
+
+
+mainClient.registerDevice = function(deviceID,callback){
+console.log('Registering this device with the database...');
+var deviceID=deviceID
+if(typeof deviceID!=="undefined"){
+	$.post('http://localhost:8080/records',{message:'testProviderID',deviceID:deviceID})
+		//set intervals here so we don't poll too soon
+	mainClient.setIntervals();
+}
+return
+}
+
+mainClient.checkAuthorization=function(deviceID,callback){
+	console.log('checking authorization')
+	//send the device id to the server and check server side for its authorization
+	var deviceID= deviceID;
+	$.get('http://localhost:8080/checkAuthorization'+deviceID,function(data){
+		var authorization = data.authorization;
+		if (data.authorization=="authorized"){
+			mainClient.trigger('authorized')
+		}
+		else {
+			mainClient.trigger('unauthorized')
+		}
+
+	})
+	
+
+return
+}
+
+mainClient.unLinkDevice = function(deviceID,callback){
+console.log('unlinking this device')
+return
+};
+
+
+	mainClient.getRecords=function(){
+
+		$.get('http://localhost:8080/records',function(data){
 console.log('data is:',data)
-			 messages = data;
-			 _.each(messages,function(msg){
-			 	console.log(msg);
-			 	$(mainClient).append(JSON.stringify(msg));
+			 records = data;
+			 _.each(records,function(record){
+			 	console.log(record);
+			 $('#main').append(JSON.stringify(record));
 			 })
-			//$(mainClient).text(JSON.stringify(messages[0]));
+			
 		})
 	}
+
 	</script>
 </body>
 </html>

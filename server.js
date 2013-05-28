@@ -230,6 +230,7 @@ function postRecord(req, res, next) {
 
 function deleteDevice(req, res, next) {
 	//deletes a device from the database.  the whole device record.  so use sparingly!  a.k.a. "unlink"
+
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 	var deviceID = req.params.deviceID;

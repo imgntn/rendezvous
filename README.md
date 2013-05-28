@@ -19,7 +19,7 @@ This pattern is used to link a device, such as a Smart TV or Roku, with a partic
 
 
 
-<b>Prerequisites:
+<b>Prerequisites:<br>
 server: node.js -- see below for installation notes<br>
 database: mongodb -- see below for installation notes<br>
 node modules: <br>

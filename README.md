@@ -67,7 +67,7 @@ export PATH=$PATH:$MONGO_PATH/bin
 
 -6 open a new tab and type in mongo (starts client)<br> 
 -6.1 type show dbs -> shows local (empty)<br>
--6.2 type use rdzv<br>
+-6.2 type use rdzv (or call it whatever you want by typing use yourDatabaseName.  *Be sure to change the config.js file below to match this*<br>
 -6.3 type db.users.save({username:'username'});<br>
 -6.4 type show dbs -> should now show rdvz<br>
 
@@ -78,6 +78,7 @@ npm install restify connect mongoose node-uuid<br>
 
 
 <b>Using # 1 --To start the server:</b><br>
+copy sampleconfig.js to config.js and set it up so it points to mongodb://localhost:/yourDatabaseName i.e. mongodb://localhost:/rdzv
 node server.js
 
 <b>Using # 2 -- To register a device from the client:</b><br>

@@ -59,7 +59,10 @@ var RecordSchema = new Schema({
 	dateCreated: Date,
 	uuid: String,
 	regCode: String,
-	regCodeExpiration: Date,
+	regCodeExpiration: {
+		type:Date,
+		expires:'1h'
+	},
 	authorized: String,
 	message: String,
 	subscriptionExpiration: Date,
@@ -203,18 +206,19 @@ function postRecord(req, res, next) {
 
 		//set an expiration for the regcode
 
-		function setExpiration(days) {
-			if (days) {
-				var date = new Date();
-				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-				var expires = date.toGMTString();
-			}
-			return expires
-		}
+		// function setExpiration(days) {
+		// 	if (days) {
+		// 		var date = new Date();
+		// 		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		// 		var expires = date.toGMTString();
+		// 	}
+		// 	return expires
+		// }
 
-		var expiration = setExpiration(1)
-		record.regCodeExpiration = expiration;
+		// var expiration = setExpiration(1)
+		//record.regCodeExpiration = expiration;
 
+		record.regCodeExpiration= new Date();
 
 		saveRecord()
 	}

@@ -66,7 +66,7 @@ mainClient.doesDeviceExist=function(deviceID,callback){
 
 	var deviceID=deviceID;
 //send device id to server and see if deviceID already exists to avoid polling 
-$.post('http://localhost:8080/exists',{deviceID:deviceID},function(data){
+$.post('http://localhost:8081/exists',{deviceID:deviceID},function(data){
 
 	if(data.exists==false){
 		console.log('new device, registering it')
@@ -94,7 +94,7 @@ var deviceID=deviceID
 if(typeof deviceID!=="undefined"){
 
 	//have to send a message with, to prevent random records from being created (..?)
-	$.post('http://localhost:8080/records',{message:'testProviderID',deviceID:deviceID})
+	$.post('http://localhost:8081/records',{message:'testProviderID',deviceID:deviceID})
 		//set intervals here so we don't poll too soon
 	mainClient.setIntervals(deviceID);
 }
@@ -105,7 +105,7 @@ mainClient.checkAuthorization=function(deviceID,callback){
 	console.log('checking authorization')
 	//send the device id to the server and check server side for its authorization
 	var deviceID= deviceID;
-	$.post('http://localhost:8080/checkAuthorization',{deviceID:deviceID},function(data){
+	$.post('http://localhost:8081/checkAuthorization',{deviceID:deviceID},function(data){
 		var authorized = data.authorized;
 		if (data.authorized=="authorized"){
 			mainClient.trigger('authorized')
@@ -123,13 +123,15 @@ return
 
 mainClient.unLinkDevice = function(deviceID,callback){
 console.log('unlinking this device')
+var deviceID = deviceID;
+$.post('http://localhost/deleteDevice',{deviceID:deviceID})
 return
 };
 
 
 	mainClient.getRecords=function(){
 
-		$.get('http://localhost:8080/records',function(data){
+		$.get('http://localhost:8081/records',function(data){
 console.log('data is:',data)
 			 records = data;
 			 _.each(records,function(record){

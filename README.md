@@ -80,9 +80,10 @@ npm install restify connect mongoose node-uuid<br>
 <b>Using # 1 --To start the server:</b><br>
 copy sampleconfig.js to config.js and set it up so it points to mongodb://localhost:/yourDatabaseName i.e. mongodb://localhost:/rdzv<br>
 node server.js
+This will run servers on two ports right now, 8081 (the server) and 3001 (the client)
 
 <b>Using # 2 -- To register a device from the client:</b><br>
-visit http://localhost:3000 and run mainClient.init('your_deviceID') in your Javascript console (or programatically)<br>
+visit http://localhost:3001 and run mainClient.init('your_deviceID') in your Javascript console (or programatically)<br>
 *where your_deviceID is the unique identifier of the device<br>
 
 <b>Using # 3 -- To send an authorization for a device to the server after provider authorization of the user account</b><br>

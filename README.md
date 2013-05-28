@@ -4,7 +4,7 @@ A Different Engine<br>
 
 This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.  It minimizes user input on the device itself due to limited input modalities. <br>
 
-<b>Table of Contents</b></br>
+<b>Table of Contents</b><br>
 Pattern<br>
 Prerequisites<br>
 Setup (1,2,3)<br>

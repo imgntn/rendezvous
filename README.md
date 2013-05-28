@@ -1,8 +1,6 @@
 Reference Rendezvous Implementation<br>
 by James B. Pollack<br>
 A Different Engine<br>
-<br>
-<br>
 
 This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.<br>
 

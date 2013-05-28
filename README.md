@@ -54,13 +54,13 @@ vi ~/.profile (or ~/.bash_profile) and add the following<br>
 export MONGO_PATH=/usr/local/mongodb<br>
 export PATH=$PATH:$MONGO_PATH/bin<br>
 
--5. open a new tab and type in mongo -version 
--5.1 mongod (starts server)
+-5. open a new tab and type in mongo -version<br> 
+-5.1 mongod (starts server)<br>
 
 -6 open a new tab and type in mongo (starts client)<br> 
 -6.1 type show dbs -> shows local (empty)<br>
 -6.2 type use rdzv<br>
--9.2 type db.users.save({username:'username'});<br>
--9.3 type show dbs -> should now show rdvz<br>
+-6.3 type db.users.save({username:'username'});<br>
+-6.4 type show dbs -> should now show rdvz<br><br>
 
--10. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
+-7. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/

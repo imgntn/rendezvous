@@ -40,16 +40,16 @@ passport-local-mongoose<br>
 
 //installing mongodb
 
--1. download from http://www.mongodb.org/dr/fastdl.mongodb.org/osx/mongodb-osx-x86_64-2.4.3.tgz/download
--2. extract the contents to /usr/local/mongodb
--3. cd /usr/local/mongodb and run the following commands 
+-1. download from http://www.mongodb.org/dr/fastdl.mongodb.org/osx/mongodb-osx-x86_64-2.4.3.tgz/download<br>
+-2. extract the contents to /usr/local/mongodb<br>
+-3. cd /usr/local/mongodb and run the following commands<br>
 
 $ sudo mkdir -p /data/db<br>
 $ whoami<br>
 jpollack<br>
 $ sudo chown jpollack /data/db<br>
 
--4. run the following commands to add mongo to your path<br>
+-4. run the following commands to add mongo to your path<br><br>
 vi ~/.profile (or ~/.bash_profile) and add the following<br>
 export MONGO_PATH=/usr/local/mongodb<br>
 export PATH=$PATH:$MONGO_PATH/bin<br>

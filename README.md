@@ -61,6 +61,6 @@ export PATH=$PATH:$MONGO_PATH/bin<br>
 -6.1 type show dbs -> shows local (empty)<br>
 -6.2 type use rdzv<br>
 -6.3 type db.users.save({username:'username'});<br>
--6.4 type show dbs -> should now show rdvz<br><br>
+-6.4 type show dbs -> should now show rdvz<br>
 
 -7. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/

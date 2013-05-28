@@ -1,0 +1,30 @@
+<html>
+<head>
+	<script type="text/javascript" src='js/underscore.js'></script>
+	<script type="text/javascript" src='js/backbone-min.js'></script>
+	<script type="text/javascript" src='js/jquery-2.0.1.min.js'></script>
+</head>
+<body>
+	<div id="main"></div>
+	<script>
+	mainClient = $('#main');
+	_.extend(mainClient,Backbone.Events)
+	mainClient.on('attemptToVerifyLink',function(){
+		console.log('verifylink')
+	},this);
+
+	mainClient.getMessages=function(){
+
+		$.get('http://localhost:8080/messages',function(data){
+console.log('data is:',data)
+			 messages = data;
+			 _.each(messages,function(msg){
+			 	console.log(msg);
+			 	$(mainClient).append(JSON.stringify(msg));
+			 })
+			//$(mainClient).text(JSON.stringify(messages[0]));
+		})
+	}
+	</script>
+</body>
+</html>

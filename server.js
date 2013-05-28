@@ -21,15 +21,15 @@ db = mongoose.connect(config.creds.mongoose_auth_local);
 
 extend = require('mongoose-schema-extend');
 
-var User = require('./schema/User');
+// var User = require('./schema/User');
 
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
-// // CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
-passport.use(User.createStrategy());
+// var passport = require('passport')
+//   , LocalStrategy = require('passport-local').Strategy;
+// // // CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
+// passport.use(User.createStrategy());
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 
 
@@ -66,7 +66,7 @@ var Record = mongoose.model('record', RecordSchema);
 
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-	device = req.params.deviceID;
+	var device = req.params.deviceID;
 		Record.findOne({deviceID:device},'uuid',function(err,data) {
 		
 		if (err) {return handleError(err)}
@@ -90,7 +90,7 @@ var Record = mongoose.model('record', RecordSchema);
 
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-	device = req.params.deviceID;
+	var device = req.params.deviceID;
 		Record.findOne({deviceID:device},'authorized',function(err,data) {
 		
 		if (err) {return handleError(err)}
@@ -109,6 +109,39 @@ var Record = mongoose.model('record', RecordSchema);
 
 
 	}
+
+	function authenticateDevice(req,res,next){
+
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+	var regCode = req.params.regCode;
+	Record.findOne({regCode:regCode},'authorized',function(err,data) {
+		
+		if (err) {return handleError(err)}
+
+			else{
+				if(data!==null && typeof data!=='undefined'){
+					//success case
+					console.log(data);
+					console.log('auth:',data.authorized);
+					data.authorized="authorized";
+					console.log('auth:',data.authorized);
+					data.save();
+					res.send(data);
+
+				}
+				else{
+					//no data case
+				}
+			
+
+			}
+		})
+
+
+	}
+
+
 
 function postRecord(req, res, next) {
 
@@ -179,6 +212,7 @@ server.post('/records/:deviceID',postRecord);
 server.post('/records', postRecord);
 server.post('/exists', recordExists);
 server.post('/checkAuthorization', checkAuthorization);
+server.post('/authenticateDevice', authenticateDevice);
 
 
 

@@ -40,28 +40,27 @@ passport-local-mongoose<br>
 
 //installing mongodb
 
-1. download from http://www.mongodb.org/dr/fastdl.mongodb.org/osx/mongodb-osx-x86_64-2.4.3.tgz/download
-2. extract the contents to /usr/local/mongodb
-3. cd /usr/local/mongodb and run the following commands 
+-1. download from http://www.mongodb.org/dr/fastdl.mongodb.org/osx/mongodb-osx-x86_64-2.4.3.tgz/download
+-2. extract the contents to /usr/local/mongodb
+-3. cd /usr/local/mongodb and run the following commands 
 
 $ sudo mkdir -p /data/db<br>
 $ whoami<br>
 jpollack<br>
 $ sudo chown jpollack /data/db<br>
 
-
-4. run the following commands to add mongo to your path<br>
+-4. run the following commands to add mongo to your path<br>
 vi ~/.profile (or ~/.bash_profile) and add the following<br>
 export MONGO_PATH=/usr/local/mongodb<br>
 export PATH=$PATH:$MONGO_PATH/bin<br>
 
-5. open a new tab and type in mongo -version 
-5.1 mongod (starts server)
+-5. open a new tab and type in mongo -version 
+-5.1 mongod (starts server)
 
-6 open a new tab and type in mongo (starts client) 
-6.1 type show dbs -> shows local (empty)
-6.2 type use rdzv
-9.2 type db.users.save({username:'username'});
-9.3 type show dbs -> should now show rdvz
+-6 open a new tab and type in mongo (starts client)<br> 
+-6.1 type show dbs -> shows local (empty)<br>
+-6.2 type use rdzv<br>
+-9.2 type db.users.save({username:'username'});<br>
+-9.3 type show dbs -> should now show rdvz<br>
 
-10. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
+-10. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/

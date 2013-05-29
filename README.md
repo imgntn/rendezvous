@@ -48,39 +48,41 @@ Use package installer at http://nodejs.org/
 <b>Setup #2 -- Installing mongoDB (OS X)
 
 -1. download from http://www.mongodb.org/dr/fastdl.mongodb.org/osx/mongodb-osx-x86_64-2.4.3.tgz/download<br>
--2. extract the contents to /usr/local/mongodb<br>
--3. cd /usr/local/mongodb and run the following commands<br>
+-2. extract the contents to <code>/usr/local/mongodb</code><br>
+-3. <code>cd /usr/local/mongodb</code> and run the following commands<br>
 
-$ sudo mkdir -p /data/db<br>
-$ whoami<br>
+$ <code>sudo mkdir -p /data/db</code><br>
+$ <code>whoami</code><br>
 jpollack<br>
-$ sudo chown jpollack /data/db<br>
+$ <code>sudo chown jpollack /data/db</code><br>
 
 -4. run the following commands to add mongo to your path<br>
 vi ~/.profile (or ~/.bash_profile) and add the following<br>
-export MONGO_PATH=/usr/local/mongodb<br>
-export PATH=$PATH:$MONGO_PATH/bin
+<code>
+export MONGO_PATH=/usr/local/mongodb</code><br>
+<code>export PATH=$PATH:$MONGO_PATH/bin</code>
 
 -5. open a new tab and type in mongo -version<br> 
--5.1 mongod (starts server)<br>
+-5.1 <code>mongod</code> (starts server)<br>
 
 -6 open a new tab and type in mongo (starts client)<br> 
--6.1 type show dbs -> shows local (empty)<br>
--6.2 type use rdzv (or call it whatever you want by typing use yourDatabaseName.  <br>*Be sure to change the config.js file below to match this*<br>
--6.3 type db.users.save({username:'username'});<br>
--6.4 type show dbs -> should now show rdvz<br>
+-6.1 type <code> show dbs</code> -> shows local (empty)<br>
+-6.2 type <code>use rdzv </code>(or call it whatever you want by typing use yourDatabaseName.  <br>*Be sure to change the config.js file below to match this*<br>
+-6.3 type <code>db.users.save({username:'username'});</code><br>
+-6.4 type <code>show dbs -> should now show rdvz</code><br>
 
 -7. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
 
 <b>Setup # 3 --  Installing node.js packages</b> (inside rendezvous folder)<br>
 
-npm install restify connect mongoose mongoose-ttl node-uuid <br>
+<code>npm install restify connect mongoose mongoose-ttl node-uuid </code><br>
 <i>proper package file is forthcoming</i><br>
 
 <h3>Using:</h3>
 <b>Using # 1 --To start the server:</b> (inside rendezvous folder)<br>
-copy sampleconfig.js to config.js and set it up so it points to mongodb://localhost/yourDatabaseName i.e. mongodb://localhost/rdzv<br>
-node server.js
+<code>cp sampleconfig.js config.js </code> <br>
+edit config.js so it points to <code>mongodb://localhost/yourDatabaseName</code> i.e. mongodb://localhost/rdzv<b><br>
+<code>node server.js</code><br>
 This will run servers on two ports right now, 8081 (the server) and 3001 (the client)
 
 <b>Using # 2 -- To register a device from the client:</b><br>
@@ -91,22 +93,22 @@ This will run servers on two ports right now, 8081 (the server) and 3001 (the cl
 *where your_deviceID is the unique identifier of the device<br>
 
 <b>Using # 3 -- To send an authorization for a device to the server after provider authorization of the user account</b><br>
-$.post('http://localhost:8081/authenticateDevice',{regCode:'your_regCode'})<br>
+<code>$.post('http://localhost:8081/authenticateDevice',{regCode:'your_regCode'})</code><br>
 *where your_regCode is the regCode provided to the user<br>
 
 <b>Using # 4 -- Client-side Authorization State Change</b><br>
-You'll see that mainClient.authorized is false when the client is not authorized, but changes to true when the polling returns an authorized parameter.  Use this flag to drive behavior on the client.
+You'll see that <code> mainClient.authorized=false</code>  when the client is not authorized, but <code>mainclient.authorized=false</code> after polling authorizes the device.   Use this flag to drive behavior on the client.
 
 <b>Using # 5 -- Client-side UI</b><br>
 Needs at least two button elements on the Link Account Page:  "New Registration Code" and "Unlink Device"<br>
 There are two client-side methods to associate:<br>
-* mainClient.generateRegCode('deviceID') 
-* mainClient.unLinkDevice('deviceID')
+* <code>ainClient.generateRegCode('deviceID') </code>
+* <code>mainClient.unLinkDevice('deviceID')</code>
 
 
 <b>Using # 5 -- Admin Functions</b><br>
-* To see all active Records, go to http://localhost:8081/records
-* To see all active regCodes, go to http://localhost:8081/regcodes
+* To see all active Records, go to <code>http://localhost:8081/records</code>
+* To see all active regCodes, go to <codE>http://localhost:8081/regcodes</code>
 
 <h3>Screenshots:</h3><br><br>
 Show a registration code to the user on the device.<br>

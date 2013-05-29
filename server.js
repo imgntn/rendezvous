@@ -80,14 +80,17 @@ var RegCode = mongoose.model('regcode',RegCodeSchema);
 
 
 // var SubscriptionSchema = new Schema({
-
-// 	createdAt:{type:Date,expires:''},
 // 	deviceID:String,
 // 	authorized:String
-
 // })
 
+// SubscriptionSchema.plugin(ttl,{ttl:'1h'})
 // var Subscription = new mongoose.model('subscription',SubscriptionSchema);
+
+//set the ttl of an individual subscription when its created by the provider sending a registration code
+//var subscription = new Subscription();
+//subscription.ttl = req.params.ttl || '30d';
+//i.e. '60d'
 
 function getRecords(req, res, next) {
 	//responds with all of the records -- for development 

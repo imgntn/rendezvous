@@ -113,5 +113,5 @@ Show a registration code to the user on the device.
 Form on provider website where logged in user enters the registration code.
 <img src='screenshots/form.png'></img><br><br>
 
-Device is authorized.
+Device is authorized.<br>
 <img src='screenshots/success.png'></img>

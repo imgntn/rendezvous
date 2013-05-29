@@ -107,10 +107,11 @@ To see all active Records, go to http://localhost:8081/records
 To see all active regCodes, go to http://localhost:8081/regcodes
 
 <h3>Screenshots:</h3><br><br>
-Show a registration code to the user on the device.
+Show a registration code to the user on the device.<br>
 <img src='screenshots/regCode.png'></img><br><br>
 
-Form on provider website where logged in user enters the registration code. It's also possible to provide unlinking funcitonality at this level.
+Form on provider website where logged in user enters the registration code.
+<br> It's also possible to provide device unlinking funcitonality at this level.<br>
 <img src='screenshots/form.png'></img><br><br>
 
 Device is authorized.<br>

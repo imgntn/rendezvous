@@ -105,3 +105,5 @@ mainClient.generateRegCode(deviceID)<br>
 <b>Using # 5 -- Admin Functions</b><br>
 To see all active Records, go to http://localhost:8081/records
 To see all active regCodes, go to http://localhost:8081/regcodes
+
+<img src='screenshots/form.png'></img>

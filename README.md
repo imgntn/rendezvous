@@ -26,11 +26,11 @@ Screenshots<br>
 
 
 
-<h3><b>Dependencies:</b></h3><br>
+<h3><b>Dependencies:</b></h3>
 see Setup for installation notes<br>
 <b>server:</b> node.js <br>
 <b>database:</b> mongodb<br>
-<b>node modules:</b> <br>
+<b>node modules: </b> 
 restify connect mongoose mongoose-ttl node-uuid
 <br>
 

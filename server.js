@@ -1,6 +1,5 @@
 //HAVE TO HAVE
 
-// expire regCodes after 1 hr, add 'no regcode' case to data that authenticateDevice returns to provider
 // set mongodb subscriptionExpiration time based on post to authenticateDevice
 // create new docs for these and use internal mongodb expiry?
 
@@ -33,6 +32,8 @@ var config = require('./config');
 //connect to the database
 db = mongoose.connect(config.creds.mongoose_auth_local);
 
+ttl = require('mongoose-ttl');
+
 // extend = require('mongoose-schema-extend');
 
 // var User = require('./schema/User');
@@ -62,27 +63,31 @@ var RecordSchema = new Schema({
 	regCode: String,
 	authorized: String,
 	message: String,
-	subscriptionExpiration: Date,
-	//to autoExpire a document
-	// createdAt: {
-	// 	type:Date,
-	// 	expires:'1m'
-	// },
+	subscriptionExpiration: Date
 });
-
-
 
 var Record = mongoose.model('record', RecordSchema);
 
+//define what our regcode looks like
 var RegCodeSchema = new Schema({
-
-	createdAt:{type:Date,expires:'1h'},
 	uuid:String,
 	regCode:String
 });
 
+RegCodeSchema.plugin(ttl,{ttl:'1h'})
+
 var RegCode = mongoose.model('regcode',RegCodeSchema);
 
+
+// var SubscriptionSchema = new Schema({
+
+// 	createdAt:{type:Date,expires:''},
+// 	deviceID:String,
+// 	authorized:String
+
+// })
+
+// var Subscription = new mongoose.model('subscription',SubscriptionSchema);
 
 function getRecords(req, res, next) {
 	//responds with all of the records -- for development 
@@ -99,10 +104,21 @@ function getRegCodes(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 
-	RegCode.find().sort('dateCreated').execFind(function(arr, data) {
+	RegCode.find().sort('createdAt').execFind(function(arr, data) {
 		res.send(data);
 	})
 };
+
+
+// function getSubscriptions(req, res, next) {
+// 	//responds with all of the records -- for development 
+// 	res.header('Access-Control-Allow-Origin', '*');
+// 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+
+// 	Subscriptions.find().sort('createdAt').execFind(function(arr, data) {
+// 		res.send(data);
+// 	})
+// };
 
 function recordExists(req, res, next) {
 	//checks to see if a record exists, so that we know whether to create a new device or check authorization for this one
@@ -181,7 +197,7 @@ function internal_authenticateDevice(my_uuid,res,callback) {
 				data.authorized = "authorized";
 				console.log('auth:', data.authorized);
 				data.save();
-				res.send(data);
+				// res.send(data);
 
 			} else {
 				//no data case
@@ -202,9 +218,9 @@ var _req = req;
 var _res = res;
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-	var regCode = req.params.regCode;
+	var _regCode = req.params.regCode;
 	RegCode.findOne({
-		regCode: regCode
+		regCode: _regCode
 	}, 'uuid', function(err, data) {
 
 		if (err) {
@@ -304,7 +320,7 @@ res.header('Access-Control-Allow-Origin', '*');
 		data.save();
 
 	var myRegCode = new RegCode();
-		myRegCode.createdAt=new Date();
+		// myRegCode.createdAt=new Date();
 		myRegCode.uuid = tmpUuid;
 		myRegCode.regCode=regCode;
 		myRegCode.save();

@@ -1,5 +1,5 @@
 <i><b>To-Do:</b> An example of a user registration/login module and example front-end UI</i><br><br>
-<b>Reference Rendezvous Implementation<br></b>
+<h1><b>Reference Rendezvous Implementation<br></b></h1>
 by James B. Pollack<br>
 A Different Engine<br><br>
 This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.  It minimizes user input on the device itself due to limited input modalities. <br>
@@ -34,6 +34,7 @@ node modules: <br>
 restify<br>
 connect<br>
 mongoose<br>
+mongoose-ttl<br>
 node-uuid<br><br>
 //user auth stuff, not needed yet<br>
 bcrypt<br>
@@ -75,8 +76,8 @@ export PATH=$PATH:$MONGO_PATH/bin
 
 <b>Setup # 3 --  Installing node.js packages</b> (inside rendezvous folder)<br>
 
-npm install restify connect mongoose node-uuid<br>
-
+npm install restify connect mongoose mongoose-ttl node-uuid <br>
+<i>proper package file will be forthcoming</i>
 
 <b>Using # 1 --To start the server:</b> (inside rendezvous folder)<br>
 copy sampleconfig.js to config.js and set it up so it points to mongodb://localhost/yourDatabaseName i.e. mongodb://localhost/rdzv<br>

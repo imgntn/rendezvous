@@ -62,16 +62,15 @@ vi ~/.profile (or ~/.bash_profile) and add the following<br>
 export MONGO_PATH=/usr/local/mongodb</code><br>
 <code>export PATH=$PATH:$MONGO_PATH/bin</code>
 
--5. open a new tab and type in mongo -version<br> 
--5.1 <code>mongod</code> (starts server)<br>
+-5.1<code>mongod</code> (starts server)<br>
 
--6 open a new tab and type in mongo (starts client)<br> 
+-6 open a new tab and type in <code>mongo</code> (starts client)<br> 
 -6.1 type <code> show dbs</code> -> shows local (empty)<br>
 -6.2 type <code>use rdzv </code>(or call it whatever you want by typing use yourDatabaseName. Be sure to change the config.js file to match)<br>
 -6.3 type <code>db.users.save({username:'username'});</code><br>
 -6.4 type <code>show dbs</cod> -> should now show rdvz<br>
 
--7. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
+-7. to setup auto start on the server http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
 
 <b>Setup # 3 --  Installing node.js packages</b> (inside rendezvous folder)<br>
 
@@ -82,25 +81,25 @@ export MONGO_PATH=/usr/local/mongodb</code><br>
 <b>Using # 1 --To start the server:</b> (inside rendezvous folder)
 * <code>cp sampleconfig.js config.js </code> 
 * edit config.js so it points to <code>mongodb://localhost/yourDatabaseName</code> i.e. mongodb://localhost/rdzv</b><br>
-* <code>node server.js</code>
+* <code>node server.js</code>  (optionally, a process manager like forever.js is recommended to launch the server)
 <br>
-This will run servers on two ports right now, 8081 (the server) and 3001 (the client)
+This will run servers on two ports right now, 8081 (the server) and 3001 (the client).
 
-<b>Using # 2 -- To register a device from the client:</b><br>
+To use the dev client, visit <code>http://localhost:3000</code> in a browser.
+<b>Using # 2 -- To register a device:</b> (on the client)<br>
  <code>mainClient.init('your_deviceID')</code> <br>
- (on device this should happen automatically but run it in your javascript console at localhost:3001/)<br>
+ *where your_deviceID is the unique identifier of the device<br>
+ <i>on device this should happen automatically but for dev run it in your javascript console at</i> <code>localhost:3001</code><br>
 
- in your Javascript console (or programatically)<br>
-*where your_deviceID is the unique identifier of the device<br>
 
 <b>Using # 3 -- To send an authorization for a device to the server after provider authorization of the user account</b><br>
 <code>$.post('http://localhost:8081/authenticateDevice',{regCode:'your_regCode'})</code><br>
 *where your_regCode is the regCode provided to the user<br>
 
-<b>Using # 4 -- Client-side Authorization State Change</b><br>
+<b>Using # 4 -- Client-side Authorization State Change</b> (on the client)<br>
 You'll see that <code> mainClient.authorized=false</code>  when the client is not authorized, but <code>mainclient.authorized=false</code> after polling authorizes the device.   Use this flag to drive behavior on the client.
 
-<b>Using # 5 -- Client-side UI</b><br>
+<b>Using # 5 -- Client-side UI</b> (on the client)<br>
 Needs at least two button elements on the Link Account Page:  "New Registration Code" and "Unlink Device"<br>
 There are two client-side methods to associate:<br>
 * <code>mainClient.generateRegCode('deviceID') </code>

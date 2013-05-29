@@ -31,7 +31,7 @@ see Setup for installation notes<br>
 <b>server:</b> node.js <br>
 <b>database:</b> mongodb<br>
 <b>node modules: </b> 
-restify connect mongoose mongoose-ttl node-uuid
+restify connect mongoose ms node-uuid (and an included modified local version of mongoose-ttl)
 <br>
 
 <!-- //user auth stuff, not needed yet<br>
@@ -75,7 +75,7 @@ export MONGO_PATH=/usr/local/mongodb</code><br>
 
 <b>Setup # 3 --  Installing node.js packages</b> (inside rendezvous folder)<br>
 
-<code>npm install restify connect mongoose mongoose-ttl node-uuid </code><br>
+<code>npm install restify connect mongoose ms node-uuid </code><br>
 <i>proper package file is forthcoming</i><br>
 
 <h3>Using:</h3>

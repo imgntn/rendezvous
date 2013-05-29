@@ -1,6 +1,6 @@
 <i><b>To-Do:</b> An example of a user registration/login module and example front-end UI</i><br><br>
 <h1><b>Reference Rendezvous Implementation<br></b></h1>
-by James B. Pollack - <a href='mailto:james@adifferentengine.com'>james@adifferentengine.com</a> - <a href="http://adifferentengine.com">adifferentengine.com</a><br><br>
+by James B. Pollack - <a href='mailto:james@adifferentengine.com'>james@adifferentengine.com</a> - <a href="http://adifferentengine.com">A Different Engine</a><br><br>
 <b>Overview:</b><br>
 This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.  It minimizes user input on the device itself due to limited input modalities. <br>
 

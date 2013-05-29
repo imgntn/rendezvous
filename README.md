@@ -103,7 +103,7 @@ You'll see that <code> mainClient.authorized=false</code>  when the client is no
 <b>Using # 5 -- Client-side UI</b><br>
 Needs at least two button elements on the Link Account Page:  "New Registration Code" and "Unlink Device"<br>
 There are two client-side methods to associate:<br>
-* <code>ainClient.generateRegCode('deviceID') </code>
+* <code>mainClient.generateRegCode('deviceID') </code>
 * <code>mainClient.unLinkDevice('deviceID')</code>
 
 

@@ -5,11 +5,11 @@ by James B. Pollack - <a href='mailto:james@adifferentengine.com'>james@adiffere
 This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.  It minimizes user input on the device itself due to limited input modalities. <br>
 
 <h2><b>Table of Contents</b><br></h2>
-The Pattern<br>
-Dependencies<br>
-Setup (1,2,3)<br>
-Using (1,2,3,4,5,6)<br>
-Screenshots<br>
+* The Pattern
+* Dependencies
+* Setup (1,2,3)
+* Using (1,2,3,4,5,6)
+* Screenshots
 
 <h3><b>The Pattern:<br></h3>
 
@@ -84,25 +84,29 @@ node server.js
 This will run servers on two ports right now, 8081 (the server) and 3001 (the client)
 
 <b>Using # 2 -- To register a device from the client:</b><br>
-visit http://localhost:3001 and run mainClient.init('your_deviceID') in your Javascript console (or programatically)<br>
+ <code>mainClient.init('your_deviceID')</code> <br>
+ (on device this should happen automatically but run it in your javascript console at localhost:3001/)<br>
+
+ in your Javascript console (or programatically)<br>
 *where your_deviceID is the unique identifier of the device<br>
 
 <b>Using # 3 -- To send an authorization for a device to the server after provider authorization of the user account</b><br>
-$.post('http://localhost:8081/authenticateDevice',{regCode:'Your_regCode'})<br>
+$.post('http://localhost:8081/authenticateDevice',{regCode:'your_regCode'})<br>
 *where your_regCode is the regCode provided to the user<br>
 
 <b>Using # 4 -- Client-side Authorization State Change</b><br>
 You'll see that mainClient.authorized is false when the client is not authorized, but changes to true when the polling returns an authorized parameter.  Use this flag to drive behavior on the client.
 
 <b>Using # 5 -- Client-side UI</b><br>
-You'll need at least two elements on the Link Account Page:  a "New Registration Code" button and an "Unlink Device" button<br>
-There are two client-side methods for this:<br>
-mainClient.unLinkDevice(deviceID)<br>
-mainClient.generateRegCode(deviceID)<br>
+Needs at least two button elements on the Link Account Page:  "New Registration Code" and "Unlink Device"<br>
+There are two client-side methods to associate:<br>
+* mainClient.generateRegCode('deviceID') 
+* mainClient.unLinkDevice('deviceID')
+
 
 <b>Using # 5 -- Admin Functions</b><br>
-To see all active Records, go to http://localhost:8081/records
-To see all active regCodes, go to http://localhost:8081/regcodes
+* To see all active Records, go to http://localhost:8081/records
+* To see all active regCodes, go to http://localhost:8081/regcodes
 
 <h3>Screenshots:</h3><br><br>
 Show a registration code to the user on the device.<br>

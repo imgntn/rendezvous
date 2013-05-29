@@ -74,7 +74,8 @@ var RegCodeSchema = new Schema({
 	regCode:String
 });
 
-RegCodeSchema.plugin(ttl,{ttl:'1h'})
+// in MS!
+RegCodeSchema.plugin(ttl,{ttl:'1h',interval:60000})
 
 var RegCode = mongoose.model('regcode',RegCodeSchema);
 
@@ -106,12 +107,10 @@ function getRegCodes(req, res, next) {
 	//responds with all of the records -- for development 
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-
-	RegCode.find().sort('createdAt').execFind(function(arr, data) {
+	RegCode.find().sort('uuid').execFind(function(arr, data) {
 		res.send(data);
 	})
 };
-
 
 // function getSubscriptions(req, res, next) {
 // 	//responds with all of the records -- for development 
@@ -283,19 +282,13 @@ function postRecord(req, res, next) {
 		//set an expiration for the regcode
 
 	
-	
-		
-
-		//could create a new doc with the regcode and delete it automatically after a set time, based on the schema above
-		//record.createdAt= new Date();
-
-		saveRecord()
-
 		var myRegCode = new RegCode();
-		myRegCode.createdAt=new Date();
 		myRegCode.uuid = _uuid;
 		myRegCode.regCode=regCode;
 		myRegCode.save();
+
+
+		saveRecord()
 	}
 
 
@@ -317,15 +310,14 @@ res.header('Access-Control-Allow-Origin', '*');
 			
 
 		var tmpUuid = uuid.v4();
-		var regCode = tmpUuid.split('-')[0].substring(0, 3) + tmpUuid.split('-').last().substring(0, 4)
-		data.regCode = regCode;
+		var _regCode = tmpUuid.split('-')[0].substring(0, 3) + tmpUuid.split('-').last().substring(0, 4)
+		data.regCode = _regCode;
 		data.uuid = tmpUuid;
 		data.save();
 
-	var myRegCode = new RegCode();
-		// myRegCode.createdAt=new Date();
-		myRegCode.uuid = tmpUuid;
-		myRegCode.regCode=regCode;
+		var myRegCode = new RegCode();
+		myRegCode.regCode = _regCode;
+		myRegCode.uuid=tmpUuid;
 		myRegCode.save();
 
 			res.send(data);
@@ -396,7 +388,7 @@ function deleteDevice(req, res, next) {
 
 }
 
-
+	
 
 //routes
 server.listen(8081, function() {

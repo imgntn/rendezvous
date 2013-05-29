@@ -6,7 +6,7 @@ This pattern is used to link a device, such as a Smart TV or Roku, with a partic
 
 <h2><b>Table of Contents</b><br></h2>
 The Pattern<br>
-Prerequisites<br>
+Dependencies<br>
 Setup (1,2,3)<br>
 Using (1,2,3,4,5,6)<br>
 Screenshots<br>
@@ -26,15 +26,13 @@ Screenshots<br>
 
 
 
-<h3><b>Prerequisites:<br></b></h3>
-<b>server:</b> node.js -- see below for installation notes<br>
-<b>database:</b> mongodb -- see below for installation notes<br>
+<h3><b>Dependencies:</b></h3><br>
+see Setup for installation notes<br>
+<b>server:</b> node.js <br>
+<b>database:</b> mongodb<br>
 <b>node modules:</b> <br>
-restify<br>
-connect<br>
-mongoose<br>
-mongoose-ttl<br>
-node-uuid<br><br>
+restify connect mongoose mongoose-ttl node-uuid
+<br>
 
 <!-- //user auth stuff, not needed yet<br>
 bcrypt<br>

@@ -1,4 +1,4 @@
-<i><b>To-Do:</b> An example of a user registration/login module and example front-end UI</i><br><br>
+<i><b>To-Do:</b> An example of a user registration/login module and example front-end UI; generate fake device id for examples</i><br><br>
 <h1><b>Reference Rendezvous Implementation<br></b></h1>
 by James B. Pollack - <a href='mailto:james@adifferentengine.com'>james@adifferentengine.com</a> - <a href="http://adifferentengine.com">A Different Engine</a><br><br>
 <b>Overview:</b><br>

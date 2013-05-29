@@ -14,7 +14,7 @@ module.exports = exports = ttl;
 
 /**
  * Mongoose-TTL Plugin
- *
+ * https://github.com/aheckmann/mongoose-ttl
  * Provides timespan support for documents.
  *
  * Options:

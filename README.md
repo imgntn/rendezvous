@@ -1,4 +1,4 @@
-<i>To-Do: An example user registration module and example front-end UI</i><br>
+<i><b>To-Do:</b> An example user registration module and example front-end UI</i><br><br>
 <b>Reference Rendezvous Implementation<br>
 by James B. Pollack<br>
 A Different Engine<br></b>

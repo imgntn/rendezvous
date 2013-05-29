@@ -79,7 +79,7 @@ export PATH=$PATH:$MONGO_PATH/bin
 npm install restify connect mongoose mongoose-ttl node-uuid <br>
 <i>proper package file will be forthcoming</i>
 
-<h3>Using</h3>
+<h3>Using:</h3>
 <b>Using # 1 --To start the server:</b> (inside rendezvous folder)<br>
 copy sampleconfig.js to config.js and set it up so it points to mongodb://localhost/yourDatabaseName i.e. mongodb://localhost/rdzv<br>
 node server.js
@@ -106,4 +106,12 @@ mainClient.generateRegCode(deviceID)<br>
 To see all active Records, go to http://localhost:8081/records
 To see all active regCodes, go to http://localhost:8081/regcodes
 
-<img src='screenshots/form.png'></img>
+<h3>Screenshots:</h3><br><br>
+Show a registration code to the user on the device.
+<img src='screenshots/regCode.png'></img><br><br>
+
+Form on provider website where logged in user enters the registration code.
+<img src='screenshots/form.png'></img><br><br>
+
+Device is authorized.
+<img src='screenshots/success.png'></img>

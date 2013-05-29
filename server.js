@@ -32,8 +32,9 @@ var config = require('./config');
 //connect to the database
 db = mongoose.connect(config.creds.mongoose_auth_local);
 
-ttl = require('mongoose-ttl');
-
+//needed to do a custom edit to ttl.js to remove findone and findall so i should probably include this here
+//ttl = require('mongoose-ttl');
+ttl=require('./ttl')
 // extend = require('mongoose-schema-extend');
 
 // var User = require('./schema/User');
@@ -107,7 +108,7 @@ function getRegCodes(req, res, next) {
 	//responds with all of the records -- for development 
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-	RegCode.find().sort('uuid').execFind(function(arr, data) {
+	RegCode.find().sort('__ttl').execFind(function(arr, data) {
 		res.send(data);
 	})
 };

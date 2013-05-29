@@ -60,7 +60,6 @@ var RecordSchema = new Schema({
 	dateCreated: Date,
 	uuid: String,
 	regCode: String,
-	regCodeExpiration:Date,
 	authorized: String,
 	message: String,
 	subscriptionExpiration: Date,
@@ -264,19 +263,9 @@ function postRecord(req, res, next) {
 
 		//set an expiration for the regcode
 
-		function setExpiration(days,hours) {
 	
-			if (days) {
-				var date = new Date();
-			
-				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-				var expires = date.toGMTString();
-			}
-			return expires
-		}
-
-		var expiration = setExpiration(1)
-		record.regCodeExpiration = expiration;
+	
+		
 
 		//could create a new doc with the regcode and delete it automatically after a set time, based on the schema above
 		//record.createdAt= new Date();
@@ -336,8 +325,10 @@ res.header('Access-Control-Allow-Origin', '*');
 }
 
 function deAuthenticateDevice(req, res, next) {
-	//authenticates the device using a regcode to change its auth status in the database
-	//$.post('http://localhost:8080/authenticateDevice',{regCode:"439cfb1"})
+	//deauthenticates the device using a deviceID to change its auth status in the database
+	//more of an admin function
+	//will be called when 
+	//$.post('http://localhost:8080/deAuthenticateDevice',{deviceID:"myDeviceID"})
 
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
@@ -386,6 +377,8 @@ function deleteDevice(req, res, next) {
 
 }
 
+
+
 //routes
 server.listen(8081, function() {
 	console.log('%s listening at %s', server.name, server.url);
@@ -421,3 +414,23 @@ var app = connect()
 });
 
 http.createServer(app).listen(3001);
+
+
+/*
+
+set expiration method
+
+	function setExpiration(days) {
+	
+			if (days) {
+				var date = new Date();
+			
+				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+				var expires = date.toGMTString();
+			}
+			return expires
+		}
+
+
+
+*/

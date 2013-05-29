@@ -22,7 +22,7 @@ Screenshots<br>
 --The client polls the server until it recieves authorization and changes state*.<br>
 --The database will use its expiration functions to purge both old registration codes and old subscriptions.<br>
 <br>
-* I would like to replace this step with a socket to prevent unnecessary polling, but device support is not yet robust.<br>
+*I would like to replace this step with a socket to prevent unnecessary polling, but device support is not yet robust.<br>
 
 
 

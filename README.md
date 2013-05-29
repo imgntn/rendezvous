@@ -1,17 +1,17 @@
 <i><b>To-Do:</b> An example of a user registration/login module and example front-end UI</i><br><br>
 <h1><b>Reference Rendezvous Implementation<br></b></h1>
-by James B. Pollack<br>
-A Different Engine<br><br>
+<h2>by James B. Pollack<br></h2>
+<h3>A Different Engine<br><br></h3>
 This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.  It minimizes user input on the device itself due to limited input modalities. <br>
 
-<b>Table of Contents</b><br>
-Pattern<br>
+<h2><b>Table of Contents</b><br></h2>
+The Pattern<br>
 Prerequisites<br>
 Setup (1,2,3)<br>
 Using (1,2,3,4,5,6)<br>
 Screenshots<br>
 
-<b>The pattern:<br>
+<h3><b>The Pattern:<br></h3>
 
 --The client requests a registration code from the server by sending it a device ID.<br>
 --The server generates a registration code and returns it to the client.<br>
@@ -22,7 +22,7 @@ Screenshots<br>
 --The client polls the server until it recieves authorization and changes state*.<br>
 --The database will use its expiration functions to purge both old registration codes and old subscriptions.<br>
 <br>
-*[I would like to replace this step with a socket to prevent unnecessary polling, but device support is not yet robust.<br>
+* I would like to replace this step with a socket to prevent unnecessary polling, but device support is not yet robust.<br>
 
 
 

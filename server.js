@@ -75,6 +75,15 @@ var RecordSchema = new Schema({
 
 var Record = mongoose.model('record', RecordSchema);
 
+var RegCodeSchema = new Schema({
+
+	createdAt:{type:Date,expires:'1h'},
+	uuid:String,
+	regCode:String
+});
+
+var RegCode = mongoose.model('regcode',RegCodeSchema);
+
 
 function getRecords(req, res, next) {
 	//responds with all of the records -- for development 
@@ -82,6 +91,16 @@ function getRecords(req, res, next) {
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 
 	Record.find().sort('dateCreated').execFind(function(arr, data) {
+		res.send(data);
+	})
+};
+
+function getRegCodes(req, res, next) {
+	//responds with all of the records -- for development 
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+
+	RegCode.find().sort('dateCreated').execFind(function(arr, data) {
 		res.send(data);
 	})
 };
@@ -142,15 +161,15 @@ function checkAuthorization(req, res, next) {
 }
 
 
-function authenticateDevice(req, res, next) {
-	//authenticates the device using a regcode to change its auth status in the database
-	//$.post('http://localhost:8080/authenticateDevice',{regCode:"439cfb1"})
-
+function internal_authenticateDevice(my_uuid,res,callback) {
+	//authenticates the device using a uuid  to change its auth status in the database
+	
+	var _uuid = my_uuid;
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-	var regCode = req.params.regCode;
+
 	Record.findOne({
-		regCode: regCode
+		uuid: _uuid
 	}, 'authorized', function(err, data) {
 
 		if (err) {
@@ -167,7 +186,8 @@ function authenticateDevice(req, res, next) {
 
 			} else {
 				//no data case
-				res.send({authorized:'No such regCode'})
+
+				res.send({uuid:'No such uuid'})
 			}
 
 
@@ -175,6 +195,41 @@ function authenticateDevice(req, res, next) {
 	})
 
 
+}
+
+function authenticateDevice (req,res,next){
+	//takes external regcode input and runs it through internal authentication if regcode exists
+var _req = req;
+var _res = res;
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+	var regCode = req.params.regCode;
+	RegCode.findOne({
+		regCode: regCode
+	}, 'uuid', function(err, data) {
+
+		if (err) {
+			return handleError(err)
+		} else {
+			if (data !== null && typeof data !== 'undefined') {
+				//success case
+				var _data =data;
+				var _res=res;
+				internal_authenticateDevice(data.uuid,_res,function(data){
+					_res.send(_data);
+				})
+				
+				
+
+			} else {
+					var _res=res;
+				//no data case
+				_res.send({deviceID:'No such regcode'})
+			}
+
+
+		}
+	})
 }
 
 
@@ -198,8 +253,8 @@ function postRecord(req, res, next) {
 	if (typeof req.params.message !== 'undefined') {
 		record.message = req.params.message;
 		record.dateCreated = new Date();
-
-		record.uuid = uuid.v4();
+		var _uuid = uuid.v4();
+		record.uuid = _uuid;
 
 		///generate a regcode
 		var regCode = record.uuid.split('-')[0].substring(0, 3) + record.uuid.split('-').last().substring(0, 4)
@@ -209,9 +264,11 @@ function postRecord(req, res, next) {
 
 		//set an expiration for the regcode
 
-		function setExpiration(days) {
+		function setExpiration(days,hours) {
+	
 			if (days) {
 				var date = new Date();
+			
 				date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 				var expires = date.toGMTString();
 			}
@@ -225,12 +282,58 @@ function postRecord(req, res, next) {
 		//record.createdAt= new Date();
 
 		saveRecord()
+
+		var myRegCode = new RegCode();
+		myRegCode.createdAt=new Date();
+		myRegCode.uuid = _uuid;
+		myRegCode.regCode=regCode;
+		myRegCode.save();
 	}
 
 
 };
 
+function generateRegCode(req,res,next){
+res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+		Record.findOne({
+		deviceID: req.params.deviceID
+	}, function(err, data) {
 
+		if (err) {
+			return handleError(err)
+		} else {
+			if (data !== null && typeof data !== 'undefined') {
+				//success case
+				console.log(data);
+			
+
+		var tmpUuid = uuid.v4();
+		var regCode = tmpUuid.split('-')[0].substring(0, 3) + tmpUuid.split('-').last().substring(0, 4)
+		data.regCode = regCode;
+		data.uuid = tmpUuid;
+		data.save();
+
+	var myRegCode = new RegCode();
+		myRegCode.createdAt=new Date();
+		myRegCode.uuid = tmpUuid;
+		myRegCode.regCode=regCode;
+		myRegCode.save();
+
+			res.send(data);
+				
+
+			} else {
+				//no data case
+				res.send({regCode:'No such device'})
+			}
+
+
+		}
+	})
+
+
+}
 
 function deAuthenticateDevice(req, res, next) {
 	//authenticates the device using a regcode to change its auth status in the database
@@ -257,7 +360,7 @@ function deAuthenticateDevice(req, res, next) {
 
 			} else {
 				//no data case
-				res.send({authorized:'No such regCode'})
+				res.send({authorized:'No such device'})
 			}
 
 
@@ -288,6 +391,7 @@ server.listen(8081, function() {
 	console.log('%s listening at %s', server.name, server.url);
 });
 server.get('/records', getRecords);
+server.get('/regcodes', getRegCodes);
 server.post('/records/:deviceID', postRecord);
 server.post('/records', postRecord);
 server.post('/exists', recordExists);
@@ -295,7 +399,7 @@ server.post('/checkAuthorization', checkAuthorization);
 server.post('/authenticateDevice', authenticateDevice);
 server.post('/deAuthenticateDevice', deAuthenticateDevice);
 server.post('/deleteDevice', deleteDevice);
-
+server.post('/generateRegCode', generateRegCode);
 
 
 ///serve the client also during dev

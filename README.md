@@ -79,10 +79,11 @@ export MONGO_PATH=/usr/local/mongodb</code><br>
 <i>proper package file is forthcoming</i><br>
 
 <h3>Using:</h3>
-<b>Using # 1 --To start the server:</b> (inside rendezvous folder)<br>
-<code>cp sampleconfig.js config.js </code> <br>
-edit config.js so it points to <code>mongodb://localhost/yourDatabaseName</code> i.e. mongodb://localhost/rdzv</b><br>
-<code>node server.js</code><br>
+<b>Using # 1 --To start the server:</b> (inside rendezvous folder)
+* <code>cp sampleconfig.js config.js </code> 
+* edit config.js so it points to <code>mongodb://localhost/yourDatabaseName</code> i.e. mongodb://localhost/rdzv</b><br>
+* <code>node server.js</code>
+<br>
 This will run servers on two ports right now, 8081 (the server) and 3001 (the client)
 
 <b>Using # 2 -- To register a device from the client:</b><br>

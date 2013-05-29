@@ -93,3 +93,9 @@ $.post('http://localhost:8081/authenticateDevice',{regCode:'Your_regCode'})<br>
 
 <b>Using # 4 -- Client-side Authorization State Change</b><br>
 You'll see that mainClient.authorized is false when the client is not authorized, but changes to true when the polling returns an authorized parameter.  Use this flag to drive behavior on the client.
+
+<b>Using # 5 -- Client-side UI</b><br>
+You'll need at least two elements on the Link Account Page:  a "New Registration Code" button and an "Unlink Device" button
+<b>Using # 5 -- Admin Functions</b><br>
+To see all active Records, go to http://localhost:8081/records
+To see all active regCodes, go to http://localhost:8081/regcodes

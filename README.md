@@ -1,7 +1,9 @@
+
+<i>Yet To-Do: An example user registration module and front-end UI</i><br>
+<br>
 <b>Reference Rendezvous Implementation<br>
 by James B. Pollack<br>
 A Different Engine<br></b>
-<i>*To-Do: An example user registration module and front-end UI</i><br>
 This pattern is used to link a device, such as a Smart TV or Roku, with a particular user account.  It minimizes user input on the device itself due to limited input modalities. <br>
 
 <b>Table of Contents</b><br>

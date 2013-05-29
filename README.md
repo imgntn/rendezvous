@@ -53,8 +53,8 @@ Use package installer at http://nodejs.org/
 
 $ <code>sudo mkdir -p /data/db</code><br>
 $ <code>whoami</code><br>
-jpollack<br>
-$ <code>sudo chown jpollack /data/db</code><br>
+your_User<br>
+$ <code>sudo chown your_User /data/db</code><br>
 
 -4. run the following commands to add mongo to your path<br>
 vi ~/.profile (or ~/.bash_profile) and add the following<br>
@@ -69,7 +69,7 @@ export MONGO_PATH=/usr/local/mongodb</code><br>
 -6.1 type <code> show dbs</code> -> shows local (empty)<br>
 -6.2 type <code>use rdzv </code>(or call it whatever you want by typing use yourDatabaseName. Be sure to change the config.js file to match)<br>
 -6.3 type <code>db.users.save({username:'username'});</code><br>
--6.4 type <code>show dbs -> should now show rdvz</code><br>
+-6.4 type <code>show dbs</cod> -> should now show rdvz<br>
 
 -7. to setup auto start http://www.mkyong.com/mongodb/how-to-install-mongodb-on-mac-os-x/
 

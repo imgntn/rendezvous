@@ -67,7 +67,7 @@ export MONGO_PATH=/usr/local/mongodb</code><br>
 
 -6 open a new tab and type in mongo (starts client)<br> 
 -6.1 type <code> show dbs</code> -> shows local (empty)<br>
--6.2 type <code>use rdzv </code>(or call it whatever you want by typing use yourDatabaseName.  <br>*Be sure to change the config.js file below to match this*<br>
+-6.2 type <code>use rdzv </code>(or call it whatever you want by typing use yourDatabaseName. Be sure to change the config.js file to match)<br>
 -6.3 type <code>db.users.save({username:'username'});</code><br>
 -6.4 type <code>show dbs -> should now show rdvz</code><br>
 

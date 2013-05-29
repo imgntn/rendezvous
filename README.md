@@ -27,21 +27,21 @@ Screenshots<br>
 
 
 <h3><b>Prerequisites:<br></b></h3>
-server: node.js -- see below for installation notes<br>
-database: mongodb -- see below for installation notes<br>
-node modules: <br>
-//REST API, middleware, database interface, uuid generator<br>
+<b>server:</b> node.js -- see below for installation notes<br>
+<b>database:</b> mongodb -- see below for installation notes<br>
+<b>node modules:</b> <br>
 restify<br>
 connect<br>
 mongoose<br>
 mongoose-ttl<br>
 node-uuid<br><br>
-//user auth stuff, not needed yet<br>
+
+<!-- //user auth stuff, not needed yet<br>
 bcrypt<br>
 passport<br>
 passport-local<br>
 passport-local-mongoose<br><br>
-
+ -->
 
 <h3>Setup:</h3>
 <b>Setup #1 -- Installing node.js</b><br>
@@ -77,7 +77,7 @@ export PATH=$PATH:$MONGO_PATH/bin
 <b>Setup # 3 --  Installing node.js packages</b> (inside rendezvous folder)<br>
 
 npm install restify connect mongoose mongoose-ttl node-uuid <br>
-<i>proper package file will be forthcoming</i>
+<i>proper package file is forthcoming</i><br>
 
 <h3>Using:</h3>
 <b>Using # 1 --To start the server:</b> (inside rendezvous folder)<br>
@@ -110,7 +110,7 @@ To see all active regCodes, go to http://localhost:8081/regcodes
 Show a registration code to the user on the device.
 <img src='screenshots/regCode.png'></img><br><br>
 
-Form on provider website where logged in user enters the registration code.
+Form on provider website where logged in user enters the registration code. It's also possible to provide unlinking funcitonality at this level.
 <img src='screenshots/form.png'></img><br><br>
 
 Device is authorized.<br>

@@ -259,10 +259,10 @@ function postRecord(req, res, next) {
 
 	var record = new Record();
 	record.authorized = "unauthorized";
-	var saveRecord = function() {
+	var saveRecord = function(regcode) {
 		record.save(function() {
-
-			res.send(req.body);
+	res.send({_regCode:regCode});
+			//res.send(req.body);
 		});
 	}
 	if (typeof req.params.deviceID !== 'undefined') {
@@ -280,16 +280,16 @@ function postRecord(req, res, next) {
 
 		record.deviceID = req.params.deviceID;
 
-		//set an expiration for the regcode
-
 	
+		//creates a self-expiring regcode document and associates it with this record
 		var myRegCode = new RegCode();
 		myRegCode.uuid = _uuid;
 		myRegCode.regCode=regCode;
 		myRegCode.save();
 
 
-		saveRecord()
+		saveRecord(regCode);
+		
 	}
 
 

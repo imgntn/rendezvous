@@ -64,7 +64,10 @@ mainClient.clearIntervals = function(interval){
 
 mainClient.generateRegCode=function(deviceID){
 var deviceID =deviceID;
-	$.post('http://localhost:8081/generateRegCode',{deviceID:deviceID})
+	$.post('http://localhost:8081/generateRegCode',{deviceID:deviceID},function(data){
+		console.log('generateRegCode data is:',data)
+		$('#regcode').text(data.regCode);
+	})
 
 	return
 }

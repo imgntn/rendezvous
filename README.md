@@ -85,7 +85,7 @@ export MONGO_PATH=/usr/local/mongodb</code><br>
 <br>
 This will run servers on two ports right now, 8081 (the server) and 3001 (the client).
 
-To use the dev client, visit <code>http://localhost:3000</code> in a browser.
+To use the dev client, visit <code>http://localhost:3001</code> in a browser.<br>
 <b>Using # 2 -- To register a device:</b> (on the client)<br>
  <code>mainClient.init('your_deviceID')</code> <br>
  *where your_deviceID is the unique identifier of the device<br>
